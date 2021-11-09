@@ -27,10 +27,7 @@ class Stories extends StatelessWidget {
                                       children: [
                                         CircleAvatar(
                                           radius: 36.5,
-                                          backgroundColor:
-                                              Provider.of<ModelColor>(context,
-                                                      listen: false)
-                                                  .getColor,
+                                          backgroundColor: color.getColor,
                                           child: CircleAvatar(
                                             radius: 34,
                                             backgroundColor: Colors.white,

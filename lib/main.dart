@@ -2,8 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:lab2/home.dart';
+import 'package:provider/provider.dart';
+import 'package:lab2/model/model_color.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(ChangeNotifierProvider(
+      create: (_) => ModelColor(Colors.deepOrangeAccent), child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   @override

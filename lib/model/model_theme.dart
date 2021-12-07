@@ -31,7 +31,7 @@ class CheckTheme extends ChangeNotifier {
 
   check() async {
     await setPrefs();
-    isBlack = prefs.getBool("theme") ?? true;
+    isBlack = prefs.getBool("theme") ?? isBlack;
     notifyListeners();
   }
 

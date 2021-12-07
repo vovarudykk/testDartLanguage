@@ -9,8 +9,8 @@ class HomePageBottom extends StatelessWidget {
         showSelectedLabels: false,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.home_outlined,
                 color: Colors.black,
@@ -18,27 +18,31 @@ class HomePageBottom extends StatelessWidget {
               ),
               label: ""),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search_outlined,
-                color: Colors.black,
-                size: 30,
-              ),
+              icon: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/search', arguments: null);
+                  },
+                  icon: const Icon(
+                    Icons.search_outlined,
+                    color: Colors.black,
+                    size: 30,
+                  )),
               label: ""),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.add_box_outlined,
                 color: Colors.black,
                 size: 30,
               ),
               label: ""),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.favorite_outline,
                 color: Colors.black,
                 size: 30,
               ),
               label: ""),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_box_outlined,
                 color: Colors.black,

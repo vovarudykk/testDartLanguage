@@ -9,13 +9,24 @@ class HomePageBody extends StatefulWidget {
 }
 
 class _HomePageBody extends State<HomePageBody> {
-  static const countPosts = 10;
+  static const countPosts = 4;
   List<bool> isLikePressed = List.filled(countPosts, false);
+  List<int> countsSeen = List.filled(countPosts, 0);
 
   void changeIsLikePressed(index) {
     setState(() {
       isLikePressed[index] = !isLikePressed[index];
     });
+  }
+
+  void changeCountSeen(index, count) {
+    setState(() {
+      countsSeen[index] = count;
+    });
+  }
+
+  int getCountSeen(index) {
+    return countsSeen[index];
   }
 
   bool getIsLikePressed(index) {
@@ -32,8 +43,8 @@ class _HomePageBody extends State<HomePageBody> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Flexible(
-            child:
-                TimeLine(changeIsLikePressed, getIsLikePressed, getCountPosts))
+            child: TimeLine(changeIsLikePressed, getIsLikePressed,
+                getCountPosts, changeCountSeen, getCountSeen))
       ],
     );
   }

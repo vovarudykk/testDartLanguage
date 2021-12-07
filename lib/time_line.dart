@@ -5,13 +5,22 @@ import 'package:lab2/stories.dart';
 import 'stories.dart';
 import 'posts.dart';
 
+// ignore: must_be_immutable
 class TimeLine extends StatelessWidget {
   final void Function(int index) changeIsLikePressed;
   final bool Function(int index) getIsLikePressed;
   final int Function() getCountPosts;
 
+  final void Function(int index, int count) changeCountSeen;
+  final int Function(int index) getCountSeen;
+
   const TimeLine(
-      this.changeIsLikePressed, this.getIsLikePressed, this.getCountPosts);
+    this.changeIsLikePressed,
+    this.getIsLikePressed,
+    this.getCountPosts,
+    this.changeCountSeen,
+    this.getCountSeen,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,8 @@ class TimeLine extends StatelessWidget {
               child: Stories(),
               height: deviceSize.height * 0.14,
             )
-          : Posts(changeIsLikePressed, getIsLikePressed, getCountPosts, index),
+          : Posts(changeIsLikePressed, getIsLikePressed, getCountPosts, index,
+              getCountSeen, changeCountSeen),
     );
   }
 }

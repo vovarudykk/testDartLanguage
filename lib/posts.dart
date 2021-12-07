@@ -2,15 +2,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lab2/profile.dart';
 
+// ignore: must_be_immutable
 class Posts extends StatelessWidget {
   final void Function(int index) changeIsLikePressed;
   final bool Function(int index) getIsLikePressed;
   final int Function() getCountPosts;
   final int index;
 
+  final void Function(int index, int count) changeCountSeen;
+  final int Function(int index) getCountSeen;
+
+  String get countSeenString =>
+      "This photo was seen the " + getCountSeen(index).toString() + " count ";
+
   const Posts(this.changeIsLikePressed, this.getIsLikePressed,
-      this.getCountPosts, this.index);
+      this.getCountPosts, this.index, this.getCountSeen, this.changeCountSeen);
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +60,22 @@ class Posts extends StatelessWidget {
           ),
         ),
         Flexible(
-          fit: FlexFit.loose,
-          child: Image.network(
-            "https://i.ibb.co/nnMFXMr/19761278-259309971220648-4702378582209462272-n.jpg",
-            fit: BoxFit.cover,
-          ),
-        ),
+            fit: FlexFit.loose,
+            child: GestureDetector(
+              onTap: () async {
+                var newCount = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ExamplePostJson(getCountSeen(index))),
+                );
+                changeCountSeen(index, newCount);
+              },
+              child: Image.network(
+                "https://i.ibb.co/nnMFXMr/19761278-259309971220648-4702378582209462272-n.jpg",
+                fit: BoxFit.cover,
+              ),
+            )),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -85,7 +103,14 @@ class Posts extends StatelessWidget {
                 const Icon(Icons.send),
               ],
             ),
-            const Icon(FontAwesomeIcons.bookmark),
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.bookmark),
+              onPressed: () {
+                Navigator.pushNamed(context, '/savedfavorite',
+                    arguments:
+                        "https://i.ibb.co/nnMFXMr/19761278-259309971220648-4702378582209462272-n.jpg");
+              },
+            ),
           ],
         ),
         Padding(
@@ -99,6 +124,18 @@ class Posts extends StatelessWidget {
             Text(
               "vovarudykk, teddmosbyy and 132 others",
               style: TextStyle(fontWeight: FontWeight.bold),
+            )
+          ]),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            const SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              countSeenString,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ]),
         ),
